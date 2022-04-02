@@ -25,11 +25,11 @@ _2 avril 2022 - Frédéric Zind - JDLL (Lyon)_
 
 # 🔍 C'est quoi ZFS
 
-- Gestionnaire de volume ET système de fichiers
-- Stockage en _pool_
-- _Copy-On-Write_
-- Usage agressif de _cache_ (la RAM)
-- Administration simple
+* Gestionnaire de volume ET système de fichiers
+* Stockage en _pool_
+* _Copy-On-Write_
+* Usage agressif de _cache_ (la RAM)
+* Administration simple
 
 ---
 
@@ -45,20 +45,19 @@ _2 avril 2022 - Frédéric Zind - JDLL (Lyon)_
 
 ---
 
-# 📝 Histoire
+### 📝 Historique
 
-- 2001 : le développement commence avec 2 ingénieurs
+- 2001 : Naissance chez Sun
 - 2005 : Le code source de ZFS est publié.
 - 2008 : ZFS est publié dans FreeBSD 7.0.
-- 2010 : Oracle cesse de contribuer au code source de ZFS.
+- 2010 : Oracle rachète SUN, arrête de contribuer à ZFS.
 - 2010 : illumos successeur d'OpenSolaris
-- 2013 : ZFS open-source se regroupe pour former OpenZFS.
-- 2014 : OpenZFS pour Mac OS X
-- 2020 : OpenZFSv2 FreeBSD + Linux
+- 2013 : Naissance OpenZFS.
+- 2020 : Fusion codebase FreeBSD + Linux
 
 ---
 
-# 💡Quelques concepts
+# 💡Quelques concepts
 
 ---
 
@@ -68,7 +67,7 @@ _2 avril 2022 - Frédéric Zind - JDLL (Lyon)_
 
 ---
 
-# 💾 vdev
+## 💾 vdev
 
 - miroir
 - _RAID-Z_
@@ -84,34 +83,30 @@ _2 avril 2022 - Frédéric Zind - JDLL (Lyon)_
 
 ---
 
-# 🐔 Pool
+## 🐔 Pool
 
-- Gere les disques
-- Peut s'agrandir +++
-- Maintenance préventive
-- Contient des _datasets_
-
----
-
-# 🗄️ Dataset
-
-![](img/datastet.png)
+* Gere les disques
+* Peut s'agrandir +++
+* Maintenance préventive
+* Contient des _datasets_
 
 ---
 
 # 🗄️ Dataset
 
-- File system, volume, snapshot, clone, …
-- < 2^48 datasets / pool
-- Possède des propriétés
-- Gigogne/arborescent avec héritage
-- Propriétés
-    * Reservation / Quota (dataset/reference)
-    * Compression
-    * Deduplication
-    * ACLs
-    * montage local
-    * …
+![](img/dataset.png)
+
+---
+
+## 🗄️ Dataset
+
+* File system, snapshot, clone, …
+* < 2^48 datasets / pool
+* Gigogne/arborescent avec héritage
+* Propriétés
+    - Reservation / Quota (dataset/reference)
+    - Compression, deduplication
+    - ACLs, personalisé `:`, …
 
 ---
 
@@ -124,13 +119,13 @@ _2 avril 2022 - Frédéric Zind - JDLL (Lyon)_
 
 # 🎆 Modèle d'objet transactionnel
 
-- Copy-On-Write
-    * Toujours cohérent sur le disque (pas de FSCK, jamais)
-- Snapshoting
-- Send/receive
-    * expedition de snapshots
-    * Unidirectionnel
-    * Redémarable
+* Copy-On-Write
+    - Toujours cohérent sur le disque (pas de FSCK, jamais)
+* Snapshoting
+* Send / receive
+    - Expedition de snapshots
+    - Unidirectionnel
+    - Redémarable
 
 ---
 
@@ -146,20 +141,20 @@ _2 avril 2022 - Frédéric Zind - JDLL (Lyon)_
 
 # 🤝 Communauté
 
-1. code base unique: FreeBSD / Linux
-1. macOS©®
-1. Windows©®
+* code base unique: FreeBSD / Linux
+- macOS©®
+- Windows©®
 
 ---
 
 # ⚠️ Nota bene
 
-- ZFS 💚 RAM
-- vdev = IOPS ou stockage
-- compression coute moins cher que la déduplication
-- snapshots != sauvegardes
-- Ce n'est pas parce que c'est possible qu'il faut le faire
-- Pas de magie !
+* ZFS 💚 RAM
+* vdev = IOPS ou stockage
+* snapshots != sauvegardes
+* compression coute moins cher que la déduplication
+* Ce n'est pas parce que c'est possible qu'il faut le faire
+* Pas de magie !
 
 ---
 
@@ -200,6 +195,7 @@ http://pro.zind.fr
 # 🤝 Références & merci
 
 * [Matt Ahrens](https://openzfs.org/wiki/User:Mahrens) & [George Wilson]() pour: [OpenZFS Basics at SCALE16x, March 2018](https://www.youtube.com/watch?v=MsY-BafQgj4)
-* [FreeBSD Handbook - The Z File System (ZFS)](https://docs.freebsd.org/en/books/handbook/zfs/)
+* [Ubuntu — An overview of ZFS concepts](https://manpages.ubuntu.com/manpages/lateiist/en/man8/zfsconcepts.8.html)
+* [FreeBSD Handbook — The Z File System (ZFS)](https://docs.freebsd.org/en/books/handbook/zfs/)i
 * [Things Nobody Told You About ZFS](http://nex7.blogspot.com/2013/03/readme1st.html)
-* PU.storage
+* _PU.storage team_
