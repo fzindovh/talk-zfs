@@ -48,12 +48,12 @@ _2 avril 2022 - Frédéric Zind - JDLL (Lyon)_
 ### 📝 Historique
 
 - 2001 : Naissance chez Sun
-- 2005 : Le code source de ZFS est publié.
-- 2008 : ZFS est publié dans FreeBSD 7.0.
-- 2010 : Oracle rachète SUN, arrête de contribuer à ZFS.
-- 2010 : illumos successeur d'OpenSolaris
-- 2013 : Naissance OpenZFS.
-- 2020 : Fusion codebase FreeBSD + Linux
+- 2005 : Le code source de ZFS est publié
+- 2008 : ZFS est publié dans FreeBSD 7.0
+- 2010 : Rachat Oracle arrêt contributions ZFS
+- 2010 : Illumos successeur d'OpenSolaris
+- 2013 : Naissance OpenZFS
+- 2020 : ZFSv2 Fusion du code FreeBSD/Linux
 
 ---
 
@@ -69,7 +69,7 @@ _2 avril 2022 - Frédéric Zind - JDLL (Lyon)_
 
 ## 💾 vdev
 
-* miroir
+* Miroir
 * _RAID-Z_
 * _spare_ (chaud ou froid)
 * Log (ZIL)
@@ -117,15 +117,15 @@ _2 avril 2022 - Frédéric Zind - JDLL (Lyon)_
 
 ---
 
-# 🎆 Modèle objet transactionnel
+# 🎆 Modèle transactionnel
 
 * _Copy-On-Write_
     * Toujours cohérent: pas de FSCK, jamais
-* Snapshoting
+* Snapshots
 * Send / receive
     - Expédition de snapshots
     - Unidirectionnel
-    - Redémarable
+    - Re-démarrable
 
 ---
 
@@ -180,6 +180,16 @@ _2 avril 2022 - Frédéric Zind - JDLL (Lyon)_
 
 ---
 
+# 🤝 Références & merci
+
+- [Matt Ahrens](https://openzfs.org/wiki/User:Mahrens) & [George Wilson]() pour: [OpenZFS Basics at SCALE16x, March 2018](https://www.youtube.com/watch?v=MsY-BafQgj4)
+- [Ubuntu — An overview of ZFS concepts](https://manpages.ubuntu.com/manpages/lateiist/en/man8/zfsconcepts.8.html)
+- [FreeBSD Handbook — The Z File System (ZFS)](https://docs.freebsd.org/en/books/handbook/zfs/)
+- [Things Nobody Told You About ZFS](http://nex7.blogspot.com/2013/03/readme1st.html)
+- _PU.storage team_
+
+---
+
 # Merci !
 
 ---
@@ -189,13 +199,3 @@ _2 avril 2022 - Frédéric Zind - JDLL (Lyon)_
 ![QRcode](img/qrcode-pro.zind.fr.png)
 
 http://pro.zind.fr
-
----
-
-# 🤝 Références & merci
-
-* [Matt Ahrens](https://openzfs.org/wiki/User:Mahrens) & [George Wilson]() pour: [OpenZFS Basics at SCALE16x, March 2018](https://www.youtube.com/watch?v=MsY-BafQgj4)
-* [Ubuntu — An overview of ZFS concepts](https://manpages.ubuntu.com/manpages/lateiist/en/man8/zfsconcepts.8.html)
-* [FreeBSD Handbook — The Z File System (ZFS)](https://docs.freebsd.org/en/books/handbook/zfs/)i
-* [Things Nobody Told You About ZFS](http://nex7.blogspot.com/2013/03/readme1st.html)
-* _PU.storage team_
