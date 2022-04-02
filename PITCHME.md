@@ -57,7 +57,7 @@ _2 avril 2022 - Frédéric Zind - JDLL (Lyon)_
 
 ---
 
-# 💡Quelques concepts
+# 💡 Quelques concepts
 
 ---
 
@@ -69,11 +69,11 @@ _2 avril 2022 - Frédéric Zind - JDLL (Lyon)_
 
 ## 💾 vdev
 
-- miroir
-- _RAID-Z_
-- _spare_ (chaud ou froid)
-- Log (ZIL)
-- Cache (L2ARC)
+* miroir
+* _RAID-Z_
+* _spare_ (chaud ou froid)
+* Log (ZIL)
+* Cache (L2ARC)
 
 ---
 
@@ -85,7 +85,7 @@ _2 avril 2022 - Frédéric Zind - JDLL (Lyon)_
 
 ## 🐔 Pool
 
-* Gere les disques
+* Gère les disques
 * Peut s'agrandir +++
 * Maintenance préventive
 * Contient des _datasets_
@@ -106,7 +106,7 @@ _2 avril 2022 - Frédéric Zind - JDLL (Lyon)_
 * Propriétés
     - Reservation / Quota (dataset/reference)
     - Compression, deduplication
-    - ACLs, personalisé `:`, …
+    - ACLs, Prop. personalisée avec `:`, etc.
 
 ---
 
@@ -117,13 +117,13 @@ _2 avril 2022 - Frédéric Zind - JDLL (Lyon)_
 
 ---
 
-# 🎆 Modèle d'objet transactionnel
+# 🎆 Modèle objet transactionnel
 
-* Copy-On-Write
-    - Toujours cohérent sur le disque (pas de FSCK, jamais)
+* _Copy-On-Write_
+    * Toujours cohérent: pas de FSCK, jamais
 * Snapshoting
 * Send / receive
-    - Expedition de snapshots
+    - Expédition de snapshots
     - Unidirectionnel
     - Redémarable
 
@@ -133,32 +133,34 @@ _2 avril 2022 - Frédéric Zind - JDLL (Lyon)_
 
 * Administration a chaud/online
 * 2 commandes:
-    - `zpool`: pool
-    - `zfs`: filesystems
-* Delegation
+    - `zpool`: _pool_
+    - `zfs`: _dataset_
+* Délégation
 
 ---
 
 # 🤝 Communauté
 
-* code base unique: FreeBSD / Linux
-- macOS©®
-- Windows©®
+- code base unique: FreeBSD / Linux
+* macOS©®
+* Windows©®
 
 ---
 
 # ⚠️ Nota bene
 
 * ZFS 💚 RAM
-* vdev = IOPS ou stockage
+* Choix des vdevs: IOPS **ou** stockage
 * snapshots != sauvegardes
-* compression coute moins cher que la déduplication
+* La compression coute moins cher que la déduplication
 * Ce n'est pas parce que c'est possible qu'il faut le faire
 * Pas de magie !
 
 ---
 
 # 💩 Faites gaffe quand même…
+
+---
 
 [Gandi - Postmortem: September 30 storage incident](https://news.gandi.net/en/2020/10/postmortem-september-30-storage-incident/)
 
@@ -169,8 +171,6 @@ _2 avril 2022 - Frédéric Zind - JDLL (Lyon)_
 ➡️ Erreur humaine: HDD -> ZIL (SSD)
 
 ---
-
-# 💩 Faites gaffe quand même…
 
 **LTT - Our data is GONE... Again**
 
