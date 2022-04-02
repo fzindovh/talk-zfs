@@ -1,0 +1,43 @@
+@startuml
+
+skinparam node {
+    backgroundColor Transparent
+    borderColor Transparent
+    shadowing false
+    fontColor Transparent
+    ArrowColor blue
+}
+skinparam ArrowColor blue
+skinparam collections {
+    backgroundColor green
+}
+skinparam database {
+    backgroundColor grey
+}
+skinparam rectangle {
+    backgroundColor blue
+    FontSize 22
+}
+
+
+collections "file system" as fs1
+collections "file system" as fs2
+collections "file system" as fs3
+
+rectangle "volume" as v1
+rectangle "volume" as v2
+rectangle "volume" as v3
+
+database "disk 1" as d1
+database "disk 2" as d2
+database "disk 3" as d3
+
+v1 <-- d1
+v2 <-- d2
+v3 <-- d3
+
+fs1 <-- v1
+fs2 <-- v2
+fs3 <-- v3
+
+@enduml
