@@ -2,11 +2,13 @@
 
 # Histoires d'un sysadmin perfectionniste sous pression
 
-_3 avril 2022 - Frédéric Zind - JDLL (Lyon)_
+_2 avril 2022 - Frédéric Zind - JDLL (Lyon)_
 
-![logo JDLL](img/jdll.jpg)
+![logo JDLL 2022](img/jdll-2022.jpg)
 
-##
+---
+
+## Découvrez openZFS : un stockage fiable, puissant et accessible.
 
 ![openzfs logo](img/openzfs.png)
 
@@ -21,35 +23,25 @@ _3 avril 2022 - Frédéric Zind - JDLL (Lyon)_
 
 ---
 
-# C'est quoi ZFS
+# 🔍 C'est quoi ZFS
 
+- Gestionnaire de volume ET système de fichiers
 - Stockage en _pool_
-    * Fonctionnalité de système de fichiers + gestionnaire de volume en un seul
-    * Les systèmes de fichiers allouent et libèrent l'espace du _pool_
-- Modèle d'objet transactionnel
-    * Toujours cohérent sur le disque (pas de FSCK, jamais)
-    * Universel - fichier, bloc, NFS, SMB, iSCSI, FC, …
-- Intégrité des données de bout en bout
-    * Détection et correction de la corruption silencieuse des données
+- _Copy-On-Write_
+- Usage agressif de _cache_ (la RAM)
 - Administration simple
-    * Exprimer l'intention de manière concise
-    * Structures de données évolutives
 
 ---
 
-# 🔀 Différences
+# 💾 Gestion traditionnelle
 
-- combine gestionnaire de volume et système de fichiers
-    * conscient de la structure sous-jacente des disques
-    * RAID: plusieurs disques mais OS n'en voit que 1
-- Pool
-    * gere les disques
-        - peut s'agrandir
-        - maintenance préventive
-    * contient des système de fichiers (_datasets_)
-        - possède des propriétés
-- Systèmes de fichiers séparés vs système de fichiers monolithique.
-- Copy-on-write
+![](img/manager-vol.png)
+
+---
+
+# 📀 Gestion par pool
+
+![](img/manager-pool.png)
 
 ---
 
@@ -66,42 +58,101 @@ _3 avril 2022 - Frédéric Zind - JDLL (Lyon)_
 
 ---
 
-# 💡Concepts:
-
-- Copy-On-Write
-- Dataset
-    * file system (monté localement)
-    * volume
-    * snapshot
-    * clone
-* Reservation / Quota (dataset/reference)
-* Compression
-* Deduplication
-* Copies
-* Checksum
-* Scrub
-
-- Cache: ARC = MFU & MFU vs LFU
-- ZIL
-- vdev:
-    * miroir
-    * _RAID-Z
-    * _spare_ (chaud ou froid)
-    * Log (ZIL)
-    * Cache (L2ARC)
-Resilver
-Status
-    Online
-    Offline
-    Faulted
-    Degraded
-
-- Feature Flags
+# 💡Quelques concepts
 
 ---
 
+# 💾 vdev
 
-# ⚠️
+![](img/vdev.png)
+
+---
+
+# 💾 vdev
+
+- miroir
+- _RAID-Z_
+- _spare_ (chaud ou froid)
+- Log (ZIL)
+- Cache (L2ARC)
+
+---
+
+# 🐔 Pool
+
+![](img/pool.png)
+
+---
+
+# 🐔 Pool
+
+- Gere les disques
+- Peut s'agrandir +++
+- Maintenance préventive
+- Contient des _datasets_
+
+---
+
+# 🗄️ Dataset
+
+![](img/datastet.png)
+
+---
+
+# 🗄️ Dataset
+
+- File system, volume, snapshot, clone, …
+- < 2^48 datasets / pool
+- Possède des propriétés
+- Gigogne/arborescent avec héritage
+- Propriétés
+    * Reservation / Quota (dataset/reference)
+    * Compression
+    * Deduplication
+    * ACLs
+    * montage local
+    * …
+
+---
+
+# ⚡ Cache
+
+- ARC
+- L2ARC
+
+---
+
+# 🎆 Modèle d'objet transactionnel
+
+- Copy-On-Write
+    * Toujours cohérent sur le disque (pas de FSCK, jamais)
+- Snapshoting
+- Send/receive
+    * expedition de snapshots
+    * Unidirectionnel
+    * Redémarable
+
+---
+
+# 🤓 Administration simple
+
+* Administration a chaud/online
+* 2 commandes:
+    - `zpool`: pool
+    - `zfs`: filesystems
+* Delegation
+
+---
+
+# 🤝 Communauté
+
+1. code base unique: FreeBSD / Linux
+1. macOS©®
+1. Windows©®
+
+---
+
+# ⚠️ Nota bene
 
 - ZFS 💚 RAM
 - vdev = IOPS ou stockage
@@ -114,17 +165,23 @@ Status
 
 # 💩 Faites gaffe quand même…
 
-* [Gandi - Postmortem: September 30 storage incident](https://news.gandi.net/en/2020/10/postmortem-september-30-storage-incident/)
-* [LTT - Our data is GONE... Again](https://www.youtube.com/watch?v=Npu7jkJk5nM)
+[Gandi - Postmortem: September 30 storage incident](https://news.gandi.net/en/2020/10/postmortem-september-30-storage-incident/)
+
+> 30/09/2020 @ 05:38 UTC, one of our storage units went down.
+>
+> 30/09/2020 @ 11:52 UTC we managed to bring the storage unit back online.
+
+➡️ Erreur humaine: HDD -> ZIL (SSD)
 
 ---
 
-# 🤝 Références & merci
+# 💩 Faites gaffe quand même…
 
-* [Matt Ahrens](https://openzfs.org/wiki/User:Mahrens) & [George Wilson]() pour: [OpenZFS Basics at SCALE16x, March 2018](https://www.youtube.com/watch?v=MsY-BafQgj4)
-* [FreeBSD Handbook - The Z File System (ZFS)](https://docs.freebsd.org/en/books/handbook/zfs/)
-* [Things Nobody Told You About ZFS](http://nex7.blogspot.com/2013/03/readme1st.html)
-* PU.storage
+**LTT - Our data is GONE... Again**
+
+[![LTT - Our data is GONE Again - thumbnail](img/ltt-zfs-post_mortem.jpg)](https://www.youtube.com/watch?v=Npu7jkJk5nM)
+
+➡️ Erreurs humaines
 
 ---
 
@@ -137,3 +194,12 @@ Status
 ![QRcode](img/qrcode-pro.zind.fr.png)
 
 http://pro.zind.fr
+
+---
+
+# 🤝 Références & merci
+
+* [Matt Ahrens](https://openzfs.org/wiki/User:Mahrens) & [George Wilson]() pour: [OpenZFS Basics at SCALE16x, March 2018](https://www.youtube.com/watch?v=MsY-BafQgj4)
+* [FreeBSD Handbook - The Z File System (ZFS)](https://docs.freebsd.org/en/books/handbook/zfs/)
+* [Things Nobody Told You About ZFS](http://nex7.blogspot.com/2013/03/readme1st.html)
+* PU.storage
