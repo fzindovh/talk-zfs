@@ -1,0 +1,44 @@
+@startuml
+
+skinparam node {
+    backgroundColor Transparent
+    borderColor Transparent
+    shadowing false
+    fontColor Transparent
+    ArrowColor blue
+}
+skinparam ArrowColor blue
+skinparam collectionsBackgroundColor green
+skinparam databaseBackgroundColor grey
+skinparam rectangle {
+    backgroundColor blue
+    fontSize 30
+}
+
+
+collections "ZFS" as fs1
+collections "ZFS" as fs2
+collections "ZFS" as fs3
+
+rectangle Pool {
+  node b1
+  node b2
+  node b3
+}
+
+b1 -[hidden] b2
+b2 -[hidden] b3
+
+database "disk 1" as d1
+database "disk 2" as d2
+database "disk 3" as d3
+
+b1 <-- d1
+b2 <-- d2
+b3 <-- d3
+
+fs1 <-- b1
+fs2 <-- b2
+fs3 <-- b3
+
+@enduml
