@@ -1,25 +1,77 @@
 <!-- theme: uncover -->
 
-# Histoires d'un sysadmin perfectionniste sous pression
+# openZFS / VTT 2023
 
-_2 avril 2022 - Frédéric Zind - JDLL (Lyon)_
+[![openzfs logo](img/openzfs.png)](https://openzfs.org)                        [![logo Very Tech Trip 2023](img/vtt-2023.png)](https://verytechtrip.com/)
 
-![logo JDLL 2022](img/jdll-2022.jpg)
-
----
-
-## Découvrez openZFS : un stockage fiable, puissant et accessible.
-
-![openzfs logo](img/openzfs.png)
 
 ---
 
-# 👨 Qui suis-je ?
+# Témoignages
 
-* 🔧 2000: technicien en mécanique
-* 🐍 2018: apprenti charmeur de serpent
-* 🧰 2019: dev django
-* 🚑️ 2020: Soigneur de _pool_ ZFS (sys admin)
+---
+
+# 🧑‍🦰
+
+**Pour des images de VM**
+
+> Dans une infra constituée de machines virtuelle il faut un espace de stockage avec de bonne performances sur des fichiers de grosse taille.
+
+_- Camille, système virtualisés_
+
+---
+
+# 🧑🏿
+
+**Des données brutes**
+
+> On collecte de très grosse quantité de donné brutes du même type, un système idéal serait optimisé pour tirer partit de cette similarité des données.
+
+_- Ali, traitement d'images_
+
+---
+
+# 🧑🏼‍🦲
+
+**Pour de la base de donnée**
+
+> Nos bases de données ont besoin d'un stockage performant pour répondre au plus vite aux utilisateurs, réaliser des sauvegarde ne doit pas se faire au détriment du service
+
+_- Alex, DBA_
+
+---
+
+# 👨🏾‍🦱
+
+**Construire un process de sauvegarde**
+
+> Nos processus de sauvegarde utilise des _snapshot_ gère le chiffrement de bout en bout ou à certaines étapes dans certains cas. Gérer des pétaoctets n'est pas un problème.
+
+_- Nat, équipe archivage_
+
+---
+
+# 🗣️ Qui suis-je ?
+
+---
+
+**🗣️ Qui suis-je ?**
+
+🐔 🚑️ soigneur de pool ZFS chez OVHcloud depuis 2020 `VU.ops`/`PU.storage`
+
+* 👪 père de famille
+* 🛠️ construction et usage des outils
+* 🐍 communauté francophone Python ([AFPy](http://afpy.org/))
+
+
+---
+
+**🔊 De quoi va-t on parler 🔊**
+
+* 🔍 C'est quoi ZFS
+* 💡 Principaux concepts ZFS
+* 🛠️ Usages et choix chez OVH
+* 💩 Faites gaffe quand même…
 
 ---
 
@@ -33,41 +85,33 @@ _2 avril 2022 - Frédéric Zind - JDLL (Lyon)_
 
 ---
 
-# 💾 Gestion traditionnelle
+**📝 Historique**
 
-![](img/manager-vol.png)
-
----
-
-# 📀 Gestion par pool
-
-![](img/manager-pool.png)
-
----
-
-### 📝 Historique
-
-- 2001 : Naissance chez Sun
-- 2005 : Le code source de ZFS est publié
-- 2008 : ZFS est publié dans FreeBSD 7.0
-- 2010 : Rachat Oracle arrêt contributions ZFS
-- 2010 : Illumos successeur d'OpenSolaris
-- 2013 : Naissance OpenZFS
-- 2020 : ZFSv2 Fusion du code FreeBSD/Linux
+- **2001**: **Naissance** chez Sun
+- **2005**: Le **code source** de ZFS est **publié**
+- **2008**: ZFS est publié dans **FreeBSD 7.0**
+- **2010**: Rachat **Oracle** arrêt contributions ZFS
+- **2010**: **Illumos** successeur d'OpenSolaris
+- **2013**: Naissance **OpenZFS**
+- **2020**: ZFS 2.0 Fusion du code **FreeBSD/Linux**
 
 ---
 
-# 💡 Quelques concepts
+**💾 Gestion disques**
+
+_volume_              vs.            _pool_
+
+![](img/manager-vol.png)            ![](img/manager-pool.png)
 
 ---
 
-# 💾 vdev
-
-![](img/vdev.png)
+# 💡 Principaux concepts ZFS
 
 ---
 
-## 💾 vdev
+**💾 vdev**
+
+![](img/vdev.png)  
 
 * Miroir
 * _RAID-Z_
@@ -77,13 +121,9 @@ _2 avril 2022 - Frédéric Zind - JDLL (Lyon)_
 
 ---
 
-# 🐔 Pool
+**🐔 Pool**
 
 ![](img/pool.png)
-
----
-
-## 🐔 Pool
 
 * Gère les disques
 * Peut s'agrandir +++
@@ -92,32 +132,25 @@ _2 avril 2022 - Frédéric Zind - JDLL (Lyon)_
 
 ---
 
-# 🗄️ Dataset
+**🗄️ Dataset**
 
 ![](img/dataset.png)
 
----
-
-## 🗄️ Dataset
-
 * File system, snapshot, clone, …
-* < 2^48 datasets / pool
 * Gigogne/arborescent avec héritage
-* Propriétés
-    - Reservation / Quota (dataset/reference)
-    - Compression, deduplication
-    - ACLs, Prop. personalisée avec `:`, etc.
+* Propriétés: Reservation, Quota, Compression, dedup°, ACLs, perso, etc.
 
 ---
 
-# ⚡ Cache
+**⚡ Cache**
 
 - ARC
 - L2ARC
+- ZIL
 
 ---
 
-# 🎆 Modèle transactionnel
+**🎆 Modèle transactionnel**
 
 * _Copy-On-Write_
     * Toujours cohérent: pas de FSCK, jamais
@@ -129,7 +162,18 @@ _2 avril 2022 - Frédéric Zind - JDLL (Lyon)_
 
 ---
 
-# 🤓 Administration simple
+# ⚠️ Nota bene
+
+* Pas de magie !
+* ZFS 💚 RAM
+* Choix des vdevs: IOPS **ou** stockage
+* snapshots != sauvegardes
+* compression _moins cher_ que déduplication
+* Ce n'est pas parce que c'est possible qu'il faut le faire (< 2^48 datasets / pool)
+
+---
+
+**🤓 Administration simple**
 
 * Administration a chaud/online
 * 2 commandes:
@@ -139,22 +183,9 @@ _2 avril 2022 - Frédéric Zind - JDLL (Lyon)_
 
 ---
 
-# 🤝 Communauté
+# Usages et choix chez OVH
 
-- code base unique: FreeBSD / Linux
-* macOS©®
-* Windows©®
-
----
-
-# ⚠️ Nota bene
-
-* ZFS 💚 RAM
-* Choix des vdevs: IOPS **ou** stockage
-* snapshots != sauvegardes
-* La compression coute moins cher que la déduplication
-* Ce n'est pas parce que c'est possible qu'il faut le faire
-* Pas de magie !
+🚧 🚧 🚧 🚧 🚧
 
 ---
 
@@ -195,7 +226,3 @@ _2 avril 2022 - Frédéric Zind - JDLL (Lyon)_
 ---
 
 # ⁉️ Questions , remarques, réclamations, etc.
-
-![QRcode](img/qrcode-pro.zind.fr.png)
-
-http://pro.zind.fr
