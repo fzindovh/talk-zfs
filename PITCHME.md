@@ -80,7 +80,7 @@ _- Nat, équipe archivage_
 * Gestionnaire de volume ET système de fichiers
 * Stockage en _pool_
 * _Copy-On-Write_
-* Usage agressif de _cache_ (la RAM)
+* Usage agressif de _cache_
 * Administration simple
 
 ---
@@ -115,7 +115,7 @@ _volume_              vs.            _pool_
 
 * Miroir
 * _RAID-Z_
-* _spare_ (chaud ou froid)
+* _spare_
 * Log (ZIL)
 * Cache (L2ARC)
 
@@ -144,48 +144,39 @@ _volume_              vs.            _pool_
 
 **⚡ Cache**
 
-- ARC
+- L1ARC (RAM)
 - L2ARC
-- ZIL
+- ZIL 
 
 ---
 
-**🎆 Modèle transactionnel**
+**🎆 Copy-On-Write**
 
-* _Copy-On-Write_
-    * Toujours cohérent: pas de FSCK, jamais
-* Snapshots
+* Modèle transactionnel: Toujours cohérent (pas de FSCK, jamais)
+* Snapshoting
 * Send / receive
-    - Expédition de snapshots
-    - Unidirectionnel
-    - Re-démarrable
-
----
-
-# ⚠️ Nota bene
-
-* Pas de magie !
-* ZFS 💚 RAM
-* Choix des vdevs: IOPS **ou** stockage
-* snapshots != sauvegardes
-* compression _moins cher_ que déduplication
-* Ce n'est pas parce que c'est possible qu'il faut le faire (< 2^48 datasets / pool)
 
 ---
 
 **🤓 Administration simple**
 
-* Administration a chaud/online
+* Actions à chaud/online
 * 2 commandes:
     - `zpool`: _pool_
     - `zfs`: _dataset_
-* Délégation
+* Délégation de droit
 
 ---
 
 # Usages et choix chez OVH
 
 🚧 🚧 🚧 🚧 🚧
+
+* zfswatchd (26/6/2016):
+    - demon multi OS en python
+    - plusieurs vecteurs SMART, ZFS, OS spécifique
+    - pro-actif
+    - monitoring d'événement
 
 ---
 
@@ -199,7 +190,7 @@ _volume_              vs.            _pool_
 >
 > 30/09/2020 @ 11:52 UTC we managed to bring the storage unit back online.
 
-➡️ Erreur humaine: HDD -> ZIL (SSD)
+➡️  Erreur humaine: HDD -> ZIL (SSD)
 
 ---
 
@@ -218,6 +209,11 @@ _volume_              vs.            _pool_
 - [FreeBSD Handbook — The Z File System (ZFS)](https://docs.freebsd.org/en/books/handbook/zfs/)
 - [Things Nobody Told You About ZFS](http://nex7.blogspot.com/2013/03/readme1st.html)
 - _PU.storage team_
+
+---
+
+? persona de conclusion?
+
 
 ---
 
