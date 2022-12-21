@@ -109,15 +109,15 @@ _volume_              vs.            _pool_
 
 ---
 
-**💾 vdev**
+**💾 `VDEV`**
 
 ![](img/vdev.png)  
 
-* Miroir
+-> Virtual DEVice
+* _mirror_
 * _RAID-Z_
 * _spare_
-* Log (ZIL)
-* Cache (L2ARC)
+* Log / Cache
 
 ---
 
@@ -125,7 +125,7 @@ _volume_              vs.            _pool_
 
 ![](img/pool.png)
 
-* Gère les disques
+* Contient les `VDEVs`
 * Peut s'agrandir +++
 * Maintenance préventive
 * Contient des _datasets_
@@ -144,26 +144,24 @@ _volume_              vs.            _pool_
 
 **⚡ Cache**
 
-- L1ARC (RAM)
-- L2ARC
-- ZIL 
+- L1ARC -> RAM
+- L2ARC -> disque
+- ZIL -> disque
 
 ---
 
 **🎆 Copy-On-Write**
 
-* Modèle transactionnel: Toujours cohérent (pas de FSCK, jamais)
-* Snapshoting
-* Send / receive
+* ✅ Modèle transactionnel toujours cohérent (pas de FSCK, jamais)
+* 📸 Snapshoting
+* 🔁 Send / receive
 
 ---
 
 **🤓 Administration simple**
 
 * Actions à chaud/online
-* 2 commandes:
-    - `zpool`: _pool_
-    - `zfs`: _dataset_
+* 2 commandes `zpool` / `zfs`
 * Délégation de droit
 
 ---
@@ -177,6 +175,27 @@ _volume_              vs.            _pool_
     - plusieurs vecteurs SMART, ZFS, OS spécifique
     - pro-actif
     - monitoring d'événement
+
+---
+
+* _Storage_: backend
+    - DB zabbix / compression / mirroir / baremetal 2-3T
+    - serveur borg -> snap / petit volume 
+    - ~128 VM
+    - rotation `zfs-autosnapshot`
+
+---
+
+* _Baremetal_: mirroirs d'image d'installation
+    - Debian
+    - 180T / 6TB 7200RPM SAS 
+    - 1 scrub mensuel (1 jour)
+    -
+
+---
+
+* _Helpdesk_: laptop linux
+    - et non…  😭
 
 ---
 
