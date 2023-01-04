@@ -162,40 +162,62 @@ _volume_              vs.            _pool_
 
 * Actions à chaud/online
 * 2 commandes `zpool` / `zfs`
-* Délégation de droit
+* Délégation de droit: `zfs allow <user> <perm> <dataset>`
 
 ---
 
-# Usages et choix chez OVH
+![](img/200-ovhcloud.png)  
 
-🚧 🚧 🚧 🚧 🚧
-
-* zfswatchd (26/6/2016):
-    - demon multi OS en python
-    - plusieurs vecteurs SMART, ZFS, OS spécifique
-    - pro-actif
-    - monitoring d'événement
+#❓ 🤔
 
 ---
 
-* _Storage_: backend
-    - DB zabbix / compression / mirroir / baremetal 2-3T
-    - serveur borg -> snap / petit volume 
-    - ~128 VM
-    - rotation `zfs-autosnapshot`
+![](img/200-ovhcloud.png)  
+
+* _Baremetal_
+* _Digital core_ (Databases)
+* _Storaqe_
 
 ---
 
-* _Baremetal_: mirroirs d'image d'installation
-    - Debian
-    - 180T / 6TB 7200RPM SAS 
-    - 1 scrub mensuel (1 jour)
-    -
+_Baremetal_
+
+* mirroirs d'image netboot (legacy)
+* mirroirs d'image d'installation
+    * Debian
+    * 180T / 6TB 7200RPM SAS 12Gbps 256MB Cache
+    * 1 scrub mensuel (1 jour)
 
 ---
 
-* _Helpdesk_: laptop linux
-    - et non…  😭
+_Storage_: produits
+
+![Storage volume overview](img/202211-storage_overwiew.png)
+
+---
+
+_Storage_: backend
+
+* DB zabbix / compression / mirroir / baremetal 2-3T
+* serveur borg -> snap locaux  / petit volume / (RBX/BHS/SBG)
+* ~128 VM
+* rotation `zfs-autosnapshot`
+
+---
+
+`zfswatchd`
+
+* 26/6/2016
+* demon multi OS en python
+* plusieurs vecteurs SMART, ZFS, OS spécifique
+* pro-actif
+* monitoring d'événement
+
+---
+
+_Helpdesk_: laptop sous linux/freeBSD
+
+* et non…  😭
 
 ---
 
@@ -221,6 +243,16 @@ _volume_              vs.            _pool_
 
 ---
 
+**Et enfin…**
+
+# 🧑
+
+> J’ai encore beaucoup de choses à apprendre, mais j’ai vu une présentation qui m’a expliqué les bases de ZFS. L'outil n'est pas magique, mais permet d'adresser plein de problématiques de stockage: **j'ai envie d'essayer 🛠️ 🚀**
+
+_- Vous !_
+
+---
+
 # 🤝 Références & merci
 
 - [Matt Ahrens](https://openzfs.org/wiki/User:Mahrens) & [George Wilson]() pour: [OpenZFS Basics at SCALE16x, March 2018](https://www.youtube.com/watch?v=MsY-BafQgj4)
@@ -228,11 +260,6 @@ _volume_              vs.            _pool_
 - [FreeBSD Handbook — The Z File System (ZFS)](https://docs.freebsd.org/en/books/handbook/zfs/)
 - [Things Nobody Told You About ZFS](http://nex7.blogspot.com/2013/03/readme1st.html)
 - _PU.storage team_
-
----
-
-? persona de conclusion?
-
 
 ---
 
