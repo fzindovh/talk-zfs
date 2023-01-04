@@ -7,47 +7,12 @@
 
 ---
 
-# Témoignages
+# 📁 Stockage fichier
 
----
-
-# 🧑‍🦰
-
-**Pour des images de VM**
-
-> Dans une infra constituée de machines virtuelle il faut un espace de stockage avec de bonne performances sur des fichiers de grosse taille.
-
-_- Camille, système virtualisés_
-
----
-
-# 🧑🏿
-
-**Des données brutes**
-
-> On collecte de très grosse quantité de donné brutes du même type, un système idéal serait optimisé pour tirer partit de cette similarité des données.
-
-_- Ali, traitement d'images_
-
----
-
-# 🧑🏼‍🦲
-
-**Pour de la base de donnée**
-
-> Nos bases de données ont besoin d'un stockage performant pour répondre au plus vite aux utilisateurs, réaliser des sauvegarde ne doit pas se faire au détriment du service
-
-_- Alex, DBA_
-
----
-
-# 👨🏾‍🦱
-
-**Construire un process de sauvegarde**
-
-> Nos processus de sauvegarde utilise des _snapshot_ gère le chiffrement de bout en bout ou à certaines étapes dans certains cas. Gérer des pétaoctets n'est pas un problème.
-
-_- Nat, équipe archivage_
+* système virtualisés: _pour des images de VM_
+* traitement de données*: _collecte avant traitement_
+* base de donnée*: _administrations, architecture, …_
+* processus de sauvegarde*: _Équipe archivage_
 
 ---
 
@@ -68,7 +33,7 @@ _- Nat, équipe archivage_
 
 **🔊 De quoi va-t on parler 🔊**
 
-* 🔍 C'est quoi ZFS
+* 🔍 C'est quoi ZFS?
 * 💡 Principaux concepts ZFS
 * 🛠️ Usages et choix chez OVH
 * 💩 Faites gaffe quand même…
@@ -77,11 +42,11 @@ _- Nat, équipe archivage_
 
 # 🔍 C'est quoi ZFS
 
-* Gestionnaire de volume ET système de fichiers
+* Gestionnaire de volume **ET** système de fichiers
 * Stockage en _pool_
 * _Copy-On-Write_
-* Usage agressif de _cache_
 * Administration simple
+* Usage agressif de _cache_
 
 ---
 
@@ -144,9 +109,12 @@ _volume_              vs.            _pool_
 
 **⚡ Cache**
 
-- L1ARC -> RAM
-- L2ARC -> disque
-- ZIL -> disque
+* L1ARC -> RAM
+    * _Adaptative R Cache_
+* L2ARC -> disque
+* ZIL -> disque
+    * ZFS Intent Log
+
 
 ---
 
@@ -176,7 +144,7 @@ _volume_              vs.            _pool_
 
 * _Baremetal_
 * _Digital core_ (Databases)
-* _Storaqe_
+* _Storage_
 
 ---
 
@@ -185,7 +153,7 @@ _Baremetal_
 * mirroirs d'image netboot (legacy)
 * mirroirs d'image d'installation
     * Debian
-    * 180T / 6TB 7200RPM SAS 12Gbps 256MB Cache
+    * 180T / 6TB 7200RPM SAS
     * 1 scrub mensuel (1 jour)
 
 ---
@@ -212,12 +180,6 @@ _Storage_: backend
 * plusieurs vecteurs SMART, ZFS, OS spécifique
 * pro-actif
 * monitoring d'événement
-
----
-
-_Helpdesk_: laptop sous linux/freeBSD
-
-* et non…  😭
 
 ---
 
@@ -253,17 +215,15 @@ _- Vous !_
 
 ---
 
-# 🤝 Références & merci
+# 🤝 Merci !
+
+Références
 
 - [Matt Ahrens](https://openzfs.org/wiki/User:Mahrens) & [George Wilson]() pour: [OpenZFS Basics at SCALE16x, March 2018](https://www.youtube.com/watch?v=MsY-BafQgj4)
 - [Ubuntu — An overview of ZFS concepts](https://manpages.ubuntu.com/manpages/lateiist/en/man8/zfsconcepts.8.html)
 - [FreeBSD Handbook — The Z File System (ZFS)](https://docs.freebsd.org/en/books/handbook/zfs/)
 - [Things Nobody Told You About ZFS](http://nex7.blogspot.com/2013/03/readme1st.html)
 - _PU.storage team_
-
----
-
-# Merci !
 
 ---
 
