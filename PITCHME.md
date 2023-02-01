@@ -1,29 +1,29 @@
 <!-- theme: uncover -->
 
-# Découvrez ZFS
+# Discover ZFS
 
-Un stockage fiable, puissant et accessible
+A storage reliable, powerful and accessible
 
 [![openzfs logo](img/openzfs.png)](https://openzfs.org)                        [![logo Very Tech Trip 2023](img/vtt-2023.png)](https://verytechtrip.com/)
 
 ---
 
-# Qui suis-je 🗣️
+# Who am I 🗣️
 
-🐔 🚑️ **soigneur de pool ZFS** @ OVHcloud (2020)
+🐔 **ZFS pool lifeguard** @ OVHcloud (2020)
 
-* 👪 père de famille
-* 🛠️ construction et usage des outils
-* 🐍 communauté francophone Python ([AFPy](http://afpy.org/))
+* 👪 father
+* 🛠️ tools: build and usage
+* 🐍 Python Francophone community ([AFPy](http://afpy.org/))
 
 ---
 
-# Stockage fichier 📁
+# 📁 file storage
 
-* **processus de sauvegarde**
-* **système virtualisés** (_Images de machine virtuelle_)
-* **base de données** (_besoin spécifiques_)
-* **traitement de données** (_cache, tampon, etc…_)
+* **backup process**
+* **virtualised system** (_Virtual machine images_)
+* **database** (_specific requirements_)
+* **data processing** (_cache, buffer, etc…_)
 
 ---
 
@@ -35,7 +35,7 @@ Un stockage fiable, puissant et accessible
 
 ## ZFS ❓
 
-- _Zettabyte File System_ …ou pas
+- _Zettabyte File System_…or not
 
 > I picked ZFS for the simplest of reasons: it sounds cool
 
@@ -43,64 +43,64 @@ _[Jeff Bonwick](https://archive.wikiwix.com/cache/index2.php?url=https%253A%252F
 
 ---
 
-**🗺️ Le plan**
+**🗺️ Plan**
 
-- 🕰 Historique
-- 💡 Principaux concepts ZFS
-- 🛠️ Usages et choix chez OVH
-- 💩 Faites gaffe quand même… 😱
+- 🕰 History
+- 💡 ZFS concepts
+- 🛠️ Uses and choices at OVH
+- 💩 Beware anyway… 😱
 
 ---
 
-**🕰 Historique**
+**🕰 History**
 
-- **2001**: 🍼 **Naissance** chez [Sun Microsystems](https://en.wikipedia.org/wiki/Sun_Microsystems)
-- **2005**: Le **code source** de ZFS est **publié**
-- **2008**: ZFS est publié dans **FreeBSD 7.0**
-- **2010**: 💰 Rachat **Oracle**
+- **2001**: 🍼 **Birth** at [Sun Microsystems](https://en.wikipedia.org/wiki/Sun_Microsystems)
+- **2005**: ZFS **source code** is **published**
+- **2008**: ZFS is published in **FreeBSD 7.0**
+- **2010**: 💰 Sun buyout by **Oracle**
 - **2010**: [Illumos](https://illumos.org/)/ [OpenSolaris](https://en.wikipedia.org/wiki/OpenSolaris)
-- **2013**: Naissance **OpenZFS**
-- **2020**: 🌋 [ZFS 2.0](https://github.com/openzfs/zfs/releases/tag/zfs-2.0.0) Fusion du code **FreeBSD/Linux**
+- **2013**: Birth **OpenZFS**
+- **2020**: 🌋 [ZFS 2.0](https://github.com/openzfs/zfs/releases/tag/zfs-2.0.0) Code Merge **FreeBSD/Linux**
 
 ---
 
-# Principaux concepts ZFS 💡
+# Key ZFS concepts💡
 
 ---
 
-**Gestionnaire de volume & système de fichiers**
+**Volume Manager & File System**
 💾     📀
 
-![gestion par volume](img/management-vol.png)            ![gestion par pool](img/management-pool.png)
+![volume management](img/management-vol.png)![pool management](img/management-pool.png)
 
 ---
 
-![schema VDEV](img/management-pool-vdev.png)
+![VDEV schema](img/management-pool-vdev.png)
 
 * `VDEV == Virtual DEVice`
-* miroir (+2 disques)
-* [RAID-Z](https://en.wikipedia.org/wiki/ZFS#RAID_(%22RAID-Z%22)) (1 à 3)
-    * Blocs de taille variable
-    * Parité distribuée (~RAID5)
-* Log / Cache / _spare_
+* mirror (+2 disks)
+* [RAID-Z](https://en.wikipedia.org/wiki/ZFS#RAID_(%22RAID-Z%22)) (1-3)
+    * Variable block size
+    * Distributed parity (~[RAID5](https://en.wikipedia.org/wiki/Standard_RAID_levels#RAID_5))
+* Log / Cache / spare
 
 ---
 
 ![schema pool](img/management-pool-pool.png)
 
-* Constitué de `VDEV`
-* Peut s'agrandir / réduire (_sous conditions_)
-* Maintenance préventive
-    - reconstruction, _scrub_, data et metadata
-* Contient des _datasets_
+* Consisting of `VDEV`
+* Can expand / collapse (_under conditions_)
+* Preventive maintenance
+    - reconstruction, scrub, **data and metadata**
+* Contains datasets
 
 ---
 
-![schema dataset](img/management-pool-dataset.png)
+![dataset schema](img/management-pool-dataset.png)
 
-* **Type:** _file-system_, _snapshot_, _clone_, _volume_
-* **Héritage:** Gigogne / arborescent
-* **Propriétés:** réservation, quota, compress°, dedup°, accès autorisé (ACLs), personalisée, etc.
+* **Type:** file-system, snapshot, clone, volume
+* **Legacy:** nested / arborescent
+* **Properties:** reservation, quota, compress°, dedup°, authorised access (ACLs), personalised, etc.
 
 ---
 
@@ -109,36 +109,36 @@ _[Jeff Bonwick](https://archive.wikiwix.com/cache/index2.php?url=https%253A%252F
 * [_Adaptative Replacement Cache_](https://pthree.org/2012/12/07/zfs-administration-part-iv-the-adjustable-replacement-cache/)
 * MFU  & MRU (Most Frequently/Recently Used)
     - L1 (Level 1) -> RAM
-    - L2 -> disque
-* ZIL (ZFS Intent Log) -> disque
-    - ⚠️ persistance & redondance
+    - L2 -> disk
+* ZIL (ZFS Intent Log) -> disk
+    - ⚠️ & redundancy
     - ➡️ [PM Gandi](#27)
 
 ---
 
 **🎆 Copy-On-Write**
 
-* _«on efface plus tard, on ne modifie jamais»_ 🗑️ ⌛
-* ✅ Modèle transactionnel toujours cohérent
-    * pas de FSCK, jamais (_write hole error_)
-* 📸 Instantané (Snapshot)
+* _“delete later, never modify”_ 🗑️ ⌛
+* ✅ consistently transactional model
+    * no [`fsck`](https://en.wikipedia.org/wiki/Fsck), never ([write hole](https://en.wikipedia.org/w/index.php?title=RAID_5_write_hole&redirect=no))
+* 📸 Snapshot
 * 🔁 Send / receive
-    - 🚀 plus rapide que `rsync`
-* ⚠️ Gestion de l'espace et taux de remplissage
+    - 🚀 faster than [`rsync`](https://en.wikipedia.org/wiki/Rsync)
+* ⚠️ Space management and usage
 
 ---
 
-**🤓 Administration simple**
+**🤓 Easy administration**
 
-* Actions à chaud / en ligne
-    * manipulation de disque
-    * reconstruction et _scrub_
-* 2 commandes `zpool` / `zfs`
-* Délégation de droit: `zfs allow <user> <perm> <dataset>`
+* Hot/online operations
+    * disk manipulation
+    * resilvering and scrub (*data and metadata*)
+* 2 commands: [`zpool`](https://man.freebsd.org/cgi/man.cgi?query=zpool) / [`zfs`](https://man.freebsd.org/cgi/man.cgi?query=zfs)
+* Delegation rights: `zfs allow <user> <perm> <dataset>`
 
 ---
 
-# Chez OVHcloud ❓
+# At OVHcloud❓
 
 ---
 
@@ -146,30 +146,30 @@ _[Jeff Bonwick](https://archive.wikiwix.com/cache/index2.php?url=https%253A%252F
 
 - _Baremetal_
 - _Digital core_ (Databases)
-- et _Storage_
+- and _Storage_
 
 ---
 
 _Baremetal_
 
-* mirroirs d'image
+* image mirrors
     - netboot
-    - d'installation
+    - installation
         * Debian
         * 180T / HDD 6TB / RAID-Z
-        * 1 scrub mensuel (24h)
+        * 1 monthly scrub (24h)
 
 ---
 
 _Digital Core Databases_
 
-* sauvegardes MySQL & Postgres
-    - ZFS sur l'infra replica ~300T
-    - atout: snapshoting et _send/receive_
+* MySQL & Postgres backups
+    - ZFS on the ~300T replica infrastructure
+    - asset: snapshoting and send/receive
 
 ---
 
-**Storage** (_produits_)
+**Storage** (_products_)
 
 |Product                |PB used    |VDev type  |
 |:----------------------|:---------:|:----------|
@@ -189,30 +189,30 @@ _Digital Core Databases_
 
 ---
 
-**Storage** (gestion)
+**Storage** (Management)
 
 * ~128 VM
-* Outil de sauvegarde distant ([BorgBackup](https://www.borgbackup.org/))
-    - petit volume / (3 sites distants)
-* DB de monitoring ([Zabbix](https://www.zabbix.com/))
-    -  compression / mirroir / baremetal
+* Remote backup tool ([BorgBackup](https://www.borgbackup.org/))
+    - small volume / (3 remote sites)
+* Monitoring DB ([Zabbix](https://www.zabbix.com/))
+    - compression / mirroring / bare metal
 
 ---
 
 **Storage** (incidents)
 
-* Ça nous arrive aussi… 😱
-* Mais en proportion minime
-* **2022:** _2 corruptions clients_
-    - ➡️ restaurations de sauvegardes
-    - ℹ️ défaillance disques en simultané
+* It also happens to us… 😱
+* But in small proportion
+* **2022:** _2 customer corruptions_
+    - ➡️ backup restoration
+    - ℹ️ simultaneous disk failure
 
 ---
 
-# 🧙‍♂️ Le secret ?️
+# 🧙 Secret?️
 
-* 👪 Une équipe qui assure
-* 🛠️ De bons outils…
+* 👪 a team that rocks
+* 🛠️ good tools…
 
 ---
 
@@ -220,58 +220,56 @@ _Digital Core Databases_
 
 👼 👩‍🔧 👩‍🚒 🤖
 
-* 🕰 2016, développé en interne
-* démon multi-OS (python)
-    * indépendant et autonome
-* Déclenche et monitore la gestion des disques
+* 🕰 2016, in-house developed
+* multi-OS daemon (python)
+    * independent and autonomous
+* Triggers and monitors disk management
 * 👂 [SMART](https://www.smartmontools.org/), ZFS, OS
-* 🗣️ Datacentre, opérations, OS
+* 🗣️ Datacentre, operations, OS
 
 ---
 
 `zfswatchd`
 
-| Inter disque  | Quantité      |
-|:--------------|:--------------|
-| moy. mensuelle|81             |
-| moy. hebdo.   |22             |
-|Total (2016)   |15038          |
-|Scrub / mois   |7423           |
+| Disk intervention     | Quantity  |
+|-----------------------|:----------|
+| average monthly       |81         |
+| average weekly        |22         |
+| Total (since 2016)    |15038      |
+| monthly scrub         |7423       |
 
 
 ---
 
-# 💩 Faites gaffe quand même…
+# 💩 Be careful… 😱
 
 ---
 
-[Gandi - Postmortem: September 30 storage incident](https://news.gandi.net/en/2020/10/postmortem-september-30-storage-incident/)
+[Gandi - Postmortem: 2020 September 30 storage incident](https://news.gandi.net/en/2020/10/postmortem-september-30-storage-incident/)
 
-➡️  Erreur humaine: HDD -> ZIL (SSD)
+➡️ human error: HDD -> ZIL (SSD)
 
 ---
 
-**LTT - Our data is GONE... Again**
+**LTT - Our data is GONE… Again**
 
 [![LTT - Our data is GONE Again - thumbnail](img/ltt-zfs-post_mortem.jpg)](https://www.youtube.com/watch?v=Npu7jkJk5nM)
 
-➡️ Erreurs humaines: manque de soins
+➡️ Errors: lack of care
 
 ---
 
-# 🤝 Merci !
+# 🤝 Thank you!
 
-Références
-
-- [_Matt Ahrens_](https://openzfs.org/wiki/User:Mahrens) & _George Wilson_ pour: [OpenZFS Basics at SCALE16x](https://www.youtube.com/watch?v=MsY-BafQgj4) (March 2018)
+- [_Matt Ahrens_](https://openzfs.org/wiki/User:Mahrens) & _George Wilson_ for: [OpenZFS Basics at SCALE16x](https://www.youtube.com/watch?v=MsY-BafQgj4) (March 2018)
 - Ubuntu — [An overview of ZFS concepts](https://manpages.ubuntu.com/manpages/lateiist/en/man8/zfsconcepts.8.html)
 - FreeBSD Handbook — [The Z File System (ZFS)](https://docs.freebsd.org/en/books/handbook/zfs/)
 - [Things Nobody Told You About ZFS](http://nex7.blogspot.com/2013/03/readme1st.html)
-- PU.Baremetal (_Louis_,…), PU.Digital Core DB ([_Julien_](https://julien.riou.xyz/)), PU.Webhosting (_Maxime_, …)
+- `PU.Baremetal` (_Louis_,…), `PU.Digital Core DB` ([_Julien_](https://julien.riou.xyz/)), `PU.Webhosting` (_Maxime_, …)
 - **PU.storage team** ❤️
 
 ---
 
-# ⁉️ Questions , remarques, …
+# ⁉️ Questions, remarks…
 
 _Sources_ : **`github.com/fzindovh/talk-zfs`**
