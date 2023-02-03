@@ -2,7 +2,7 @@
 
 # Discover ZFS
 
-A storage reliable, powerful and accessible
+A reliable, powerful and accessible storage
 
 [![openzfs logo](img/openzfs.png)](https://openzfs.org)                        [![logo Very Tech Trip 2023](img/vtt-2023.png)](https://verytechtrip.com/)
 
@@ -13,7 +13,7 @@ A storage reliable, powerful and accessible
 🐔 **ZFS pool lifeguard** @ OVHcloud (2020)
 
 * 👪 father
-* 🛠️ tools: build and usage
+* 🛠️ build and use tools
 * 🐍 Python Francophone community ([AFPy](http://afpy.org/))
 
 ---
@@ -29,7 +29,7 @@ A storage reliable, powerful and accessible
 
 ## ZFS ❓
 
-- _Zettabyte File System_
+* _Zettabyte File System_
 
 ---
 
@@ -59,19 +59,24 @@ _[Jeff Bonwick](https://archive.wikiwix.com/cache/index2.php?url=https%253A%252F
 - **2008**: ZFS is published in **FreeBSD 7.0**
 - **2010**: 💰 Sun buyout by **Oracle**
 - **2010**: [Illumos](https://illumos.org/)/ [OpenSolaris](https://en.wikipedia.org/wiki/OpenSolaris)
-- **2013**: Birth **OpenZFS**
+- **2013**: 🍼 Birth **OpenZFS**
 - **2020**: 🌋 [ZFS 2.0](https://github.com/openzfs/zfs/releases/tag/zfs-2.0.0) Code Merge **FreeBSD/Linux**
 
 ---
 
-# Key ZFS concepts💡
+#  ZFS key concepts💡
 
 ---
 
 **Volume Manager & File System**
-💾     📀
 
-![volume management](img/management-vol.png)![pool management](img/management-pool.png)
+![volume management](img/management-vol.png)![empty image](img/management-empty-image.png)
+
+---
+
+**Volume Manager & File System**
+
+![volume management](img/management-vol-faded.png)![pool management](img/management-pool.png)
 
 ---
 
@@ -109,10 +114,10 @@ _[Jeff Bonwick](https://archive.wikiwix.com/cache/index2.php?url=https%253A%252F
 * [_Adaptative Replacement Cache_](https://pthree.org/2012/12/07/zfs-administration-part-iv-the-adjustable-replacement-cache/)
 * MFU  & MRU (Most Frequently/Recently Used)
     - L1 (Level 1) -> RAM
-    - L2 -> disk
-* ZIL (ZFS Intent Log) -> disk
-    - ⚠️ & redundancy
-    - ➡️ [PM Gandi](#27)
+    - L2 -> 📀
+* ZIL (ZFS Intent Log) -> 📀
+    - ⚠️ persistence & redundancy
+    - ➡️ [PM Gandi](#28)
 
 ---
 
@@ -189,7 +194,7 @@ _Digital Core Databases_
 
 ---
 
-**Storage** (Management)
+**Storage** (management)
 
 * ~128 VM
 * Remote backup tool ([BorgBackup](https://www.borgbackup.org/))

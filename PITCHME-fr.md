@@ -69,13 +69,18 @@ _[Jeff Bonwick](https://archive.wikiwix.com/cache/index2.php?url=https%253A%252F
 ---
 
 **Gestionnaire de volume & système de fichiers**
-💾     📀
 
-![gestion par volume](img/management-vol.png)            ![gestion par pool](img/management-pool.png)
+![volume management](img/management-vol.png)![empty image](img/management-empty-image.png)
 
 ---
 
-![schema VDEV](img/management-pool-vdev.png)
+**Gestionnaire de volume & système de fichiers**
+
+![volume management](img/management-vol-faded.png)![pool management](img/management-pool.png)
+
+---
+
+![VDEV schema](img/management-pool-vdev.png)
 
 * `VDEV == Virtual DEVice`
 * miroir (+2 disques)
@@ -96,7 +101,7 @@ _[Jeff Bonwick](https://archive.wikiwix.com/cache/index2.php?url=https%253A%252F
 
 ---
 
-![schema dataset](img/management-pool-dataset.png)
+![dataset schema](img/management-pool-dataset.png)
 
 * **Type:** _file-system_, _snapshot_, _clone_, _volume_
 * **Héritage:** Gigogne / arborescent
@@ -109,10 +114,10 @@ _[Jeff Bonwick](https://archive.wikiwix.com/cache/index2.php?url=https%253A%252F
 * [_Adaptative Replacement Cache_](https://pthree.org/2012/12/07/zfs-administration-part-iv-the-adjustable-replacement-cache/)
 * MFU  & MRU (Most Frequently/Recently Used)
     - L1 (Level 1) -> RAM
-    - L2 -> disque
-* ZIL (ZFS Intent Log) -> disque
+    - L2 -> 📀
+* ZIL (ZFS Intent Log) -> 📀
     - ⚠️ persistance & redondance
-    - ➡️ [PM Gandi](#27)
+    - ➡️ [PM Gandi](#28)
 
 ---
 
@@ -121,7 +126,7 @@ _[Jeff Bonwick](https://archive.wikiwix.com/cache/index2.php?url=https%253A%252F
 * _«efface plus tard, ne modifie jamais»_ 🗑️ ⌛
 * ✅ Modèle transactionnel toujours cohérent
     * pas de [`fsck`](https://en.wikipedia.org/wiki/Fsck), jamais (_[write hole](https://en.wikipedia.org/w/index.php?title=RAID_5_write_hole&redirect=no)_)
-* 📸 Instantané (Snapshot)
+* 📸 Instantané (_Snapshot_)
 * 🔁 Send / receive
     - 🚀 plus rapide que [`rsync`](https://en.wikipedia.org/wiki/Rsync)
 * ⚠️ Gestion de l'espace et taux de remplissage
@@ -251,7 +256,7 @@ _Digital Core Databases_
 
 ---
 
-**LTT - Our data is GONE... Again**
+**LTT - Our data is GONE… Again**
 
 [![LTT - Our data is GONE Again - thumbnail](img/ltt-zfs-post_mortem.jpg)](https://www.youtube.com/watch?v=Npu7jkJk5nM)
 
